@@ -1,0 +1,45 @@
+{
+  "name": "keltux",
+  "version": "0.1.0",
+  "description": "A modular CSS framework to fit all needs.",
+  "homepage": "TODO",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Keltusamor/keltUX.git"
+  },
+  "license": "MIT",
+  "author": "Dominik Schiffhorst",
+  "main": "dist/keltUX.css",
+  "keywords": [
+    "css",
+    "modular",
+    "framework"
+  ],
+  "scripts": {
+    "start": "npm-run-all build:dev --parallel watch serve",
+    "watch": "onchange \"src\" -- run-s build:dev",
+    "serve": "browser-sync start --server --index \"test/index.html\" --files \"test\" \"dist\"",
+    "build:dev": "run-s sass:dev autoprefixer:dev",
+    "build:prod": "run-s clean sass:prod autoprefixer:prod",
+    "build:all": "npm-run-all --sequential clean --parallel sass:* autoprefixer:*",
+    "clean": "rimraf dist",
+    "sass:dev": "node-sass --output-style expanded src/keltUX.scss dist/keltUX.css",
+    "sass:prod": "node-sass --output-style compressed src/keltUX.scss dist/keltUX.min.css",
+    "autoprefixer:dev": "postcss --use autoprefixer --no-map -b \"last 2 versions\" -r dist/keltUX.css",
+    "autoprefixer:prod": "postcss --use autoprefixer --no-map -b \"last 2 versions\" -r dist/keltUX.min.css"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "browser-sync": "^2.26.12",
+    "node-sass": "^4.14.1",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.0.2",
+    "postcss-cli": "^7.1.1",
+    "rimraf": "^3.0.2",
+    "stylelint": "^13.6.1",
+    "stylelint-config-sass-guidelines": "^7.0.0"
+  }
+}
